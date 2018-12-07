@@ -20,6 +20,11 @@ class GpsProducer implements Producer
      * @var GpsContext
      */
     private $context;
+    
+    /**
+     * @var int
+     */
+    private $deliveryDelay;
 
     public function __construct(GpsContext $context)
     {
@@ -44,16 +49,14 @@ class GpsProducer implements Producer
 
     public function setDeliveryDelay(int $deliveryDelay = null): Producer
     {
-        if (null === $deliveryDelay) {
-            return $this;
-        }
-
-        throw DeliveryDelayNotSupportedException::providerDoestNotSupportIt();
+        $this->deliveryDelay = $deliveryDelay;
+        
+        return $this;
     }
 
     public function getDeliveryDelay(): ?int
     {
-        return null;
+        return $this->deliveryDelay;
     }
 
     public function setPriority(int $priority = null): Producer
